@@ -64,19 +64,5 @@ jobs:
             cd ~/apps/ts-express-ci
             sed -i "s|DOCKER_IMAGE=.*|DOCKER_IMAGE=${{ secrets.DOCKER_IMAGE}}:${{ github.sha }}|" .env
             docker compose pull
-            docker compose up -d
-
-            echo "Waiting for app to become healthy..."
-
-            for i in $(seq 1 3); do
-              if curl http://localhost:3000/ping &> /dev/null; then
-                echo "Healthcheck passed on attempt $i"
-                exit 0
-              fi
-              echo "Attempt $i is failed, retrying in 3 s..."
-              sleep 3
-            done
-
-            echo "Healthcheck failed after 3 attemps"
-            docker compose logs app
-            exit 1
+            docker compose up -d --wait
+            docker compose ps
