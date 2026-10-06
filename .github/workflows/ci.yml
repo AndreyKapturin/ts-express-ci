@@ -56,14 +56,13 @@ jobs:
     steps:
       - name: Deploy on VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
-          with:
-            host: ${{ secrets.SSH_HOST }}
-            username: ${{ secrets.SSH_USER }}
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
-            script: |
-              cd ~/apps/ts-express-ci
-              sed -i "s|DOCKER_IMAGE=.*|DOCKER_IMAGE=${{ secrets.DOCKER_IMAGE}}:${{ github.sha }}|" .env
-              docker compose pull
-              docker compose up -d
-              docker compose ps
-              
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/apps/ts-express-ci
+            sed -i "s|DOCKER_IMAGE=.*|DOCKER_IMAGE=${{ secrets.DOCKER_IMAGE}}:${{ github.sha }}|" .env
+            docker compose pull
+            docker compose up -d
+            docker compose ps
