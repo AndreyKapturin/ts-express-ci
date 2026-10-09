@@ -18,8 +18,9 @@ const metricsMiddleware = (req: Request, res: Response, next: NextFunction): voi
   const end = httpRequestDuration.startTimer();
 
   res.on('finish', () => {
-    const route = req.route as string;
+    const route = req.path as string;
     if (route.endsWith('/metrics')) return;
+
     end({
       method: req.method,
       route,
