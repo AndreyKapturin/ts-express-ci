@@ -47,6 +47,17 @@ export function createApp() {
     res.json({ status: 'pong' });
   });
 
+  app.get('/good_log', (req: Request, res: Response) => {
+    console.log('It is good log!');
+    res.json({ status: 'good log' });
+  });
+
+  app.get('/error_log', (req: Request, res: Response) => {
+    console.error('It is good log!');
+    res.json({ status: 'error log' });
+  });
+
+
   app.get('/metrics', async (req: Request, res: Response) => {
     res.set('Content-Type', register.contentType);
     res.end(await register.metrics());
