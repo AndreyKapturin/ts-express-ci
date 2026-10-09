@@ -48,12 +48,12 @@ export function createApp() {
   });
 
   app.get('/good_log', (req: Request, res: Response) => {
-    console.log('It is good log!');
+    console.log('info: It is good log!');
     res.json({ status: 'good log' });
   });
 
   app.get('/error_log', (req: Request, res: Response) => {
-    console.error('It is good log!');
+    console.log('error: It is good log!');
     res.json({ status: 'error log' });
   });
 
